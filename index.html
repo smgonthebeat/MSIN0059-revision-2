@@ -1,0 +1,1357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MSIN0059 2021 Exam Analysis</title>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --accent-color: #3b82f6;
+            --light-bg: #f1f5f9;
+            --dark-text: #1e293b;
+            --light-text: #f8fafc;
+            --border-radius: 10px;
+            --box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.7;
+            color: var(--dark-text);
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0;
+            padding-top: 80px; /* Add padding to prevent content from being hidden under the fixed navbar */
+            background-color: var(--light-bg);
+        }
+        
+        /* 页面容器 */
+        .container {
+            padding: 20px;
+            background-color: white;
+            box-shadow: var(--box-shadow);
+            border-radius: var(--border-radius);
+            margin: 20px;
+        }
+        
+        h1, h2, h3 {
+            color: var(--secondary-color);
+            font-weight: 700;
+        }
+        
+        h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin: 1.5rem 0;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid var(--accent-color);
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            margin-top: 2.5rem;
+            padding-left: 1rem;
+            border-left: 5px solid var(--primary-color);
+        }
+        
+        h3 {
+            font-size: 1.4rem;
+            color: var(--primary-color);
+            margin-top: 1.5rem;
+        }
+        
+        p, ul, ol {
+            margin-bottom: 1rem;
+        }
+        
+        ul, ol {
+            padding-left: 2rem;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+        }
+        
+        /* 导航栏 */
+        .nav {
+            position: fixed; /* Changed from sticky to fixed */
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            padding: 15px;
+            margin: 0 auto;
+            max-width: 1200px; /* Match the body max-width */
+            z-index: 100;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            box-shadow: var(--box-shadow);
+            border-radius: 0 0 var(--border-radius) var(--border-radius); /* Add rounded corners to bottom only */
+        }
+        
+        .nav a {
+            color: white;
+            text-decoration: none;
+            margin: 5px 10px;
+            padding: 12px 20px;
+            border-radius: 50px; /* More rounded links */
+            font-weight: 500;
+            transition: all 0.3s ease;
+            background-color: rgba(255,255,255,0.1);
+        }
+        
+        .nav a:hover {
+            background-color: rgba(255,255,255,0.25);
+            transform: translateY(-2px);
+            box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+        }
+        
+        .nav a.active {
+            background-color: #36b9cc; /* Teal/blue color for active link */
+            transform: translateY(-2px);
+            box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+        }
+        
+        /* 章节样式 */
+        .section {
+            padding: 25px;
+            margin-bottom: 30px;
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .section:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+        }
+        
+        /* 问题框 */
+        .question {
+            background-color: #f8f9fa;
+            border-left: 5px solid #e74c3c;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+        
+        /* 引用块 */
+        blockquote {
+            font-style: italic;
+            color: #555;
+            padding: 15px 20px;
+            background-color: #f9f9f9;
+            border-left: 4px solid #ccc;
+            margin: 15px 0;
+            border-radius: var(--border-radius);
+        }
+        
+        /* 主题和摘录 */
+        .topic {
+            background-color: #e8f4f8;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+            border-left: 5px solid var(--primary-color);
+        }
+        
+        .excerpt {
+            background-color: #f0f7fa;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: var(--border-radius);
+            border-left: 5px solid #2ecc71;
+            font-style: italic;
+        }
+        
+        /* 表格样式 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            overflow: hidden;
+            border-radius: var(--border-radius);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        
+        th, td {
+            padding: 15px 18px;
+            text-align: left;
+            border: 1px solid #e2e8f0; /* Added border for all cells */
+        }
+        
+        th {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+        
+        tr:hover {
+            background-color: #edf2f7;
+        }
+        
+        /* 总结框 */
+        .summary-box {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            margin: 25px 0;
+            margin-bottom: 30px;
+            overflow: hidden;
+            border-top: 5px solid var(--primary-color);
+            padding: 25px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .summary-box:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+        }
+        
+        .summary-box h3 {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem;
+            margin-top: 0;
+        }
+        
+        .summary-box table {
+            margin: 0;
+            box-shadow: none;
+            border-radius: 0;
+        }
+        
+        .exam-ref {
+            background-color: #f8f9fa;
+            padding: 0.75rem 1rem;
+            border-top: 1px solid #e9ecef;
+            font-size: 0.9rem;
+            color: #555;
+        }
+        
+        /* 辅助元素样式 */
+        .toggle-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 30px;
+            cursor: pointer;
+            margin: 15px 0;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .toggle-btn:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .highlight {
+            background-color: #ffffcc;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        
+        .conclusion-item {
+            background-color: #f0f7fa;
+            border-left: 5px solid #9b59b6;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .nav {
+                padding: 10px;
+            }
+            .nav a {
+                margin: 3px 5px;
+                padding: 6px 12px;
+                font-size: 0.9rem;
+            }
+            .container {
+                margin: 10px;
+                padding: 15px;
+            }
+            h1 {
+                font-size: 2rem;
+            }
+            h2 {
+                font-size: 1.5rem;
+            }
+            .section, .summary-box {
+                padding: 20px 15px;
+            }
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+        
+        /* 打印样式 */
+        @media print {
+            .nav, .toggle-btn {
+                display: none;
+            }
+            
+            .hidden {
+                display: block !important;
+            }
+            
+            body {
+                background-color: white;
+                color: black;
+            }
+            
+            .section, .summary-box {
+                break-inside: avoid;
+                page-break-inside: avoid;
+                box-shadow: none;
+                border: 1px solid #ddd;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Move navigation bar outside of container -->
+    <div class="nav">
+        <a href="#introduction">Introduction</a>
+        <a href="#overlaps">1. Overlaps</a>
+        <a href="#topics">2. Topics</a>
+        <a href="#excerpts">3. Note Excerpts</a>
+        <a href="#table">4. Question Table</a>
+        <a href="#summary-boxes">5. Summary Boxes</a>
+        <a href="#conclusion">6. Conclusion</a>
+    </div>
+    
+    <div class="container">
+        <h1>MSIN0059 2021 Exam Analysis</h1>
+        
+        <div class="section" id="introduction">
+            <h2>Introduction</h2>
+            <p>Below is a structured analysis of the 2021 Exam Paper (MSIN0059A5UD_2021.pdf), mirroring the same style you requested previously. In addition, requirement (1) now addresses overlaps between the 2021 exam and the original sample exam paper so that you can see which topics appear twice. Everything else follows the same outline:</p>
+            <ol>
+                <li>Overlaps between 2021 Exam and the Sample Exam Paper.</li>
+                <li>Topics of the course that have been examined in the 2021 paper.</li>
+                <li>Corresponding Note Excerpts (exact text) from your MSIN0059 Note.</li>
+                <li>Table: (Question → Topic → Note Excerpt).</li>
+                <li>Conclusion on how to prepare for a final exam of similar structure.</li>
+            </ol>
+        </div>
+        
+        <div class="section" id="overlaps">
+            <h2>1. Overlaps Between the 2021 Exam Paper and the Sample Exam Paper</h2>
+            <p>By comparing the 2021 exam with the original sample exam ("Lecture 10 - Sample Exam Paper - without solutions.pdf"), the following topics and question‐styles appear in <em>both</em> papers:</p>
+            
+            <ol>
+                <li>
+                    <strong>Cost Classification & Its Role in Managerial Decisions</strong>
+                    <ul>
+                        <li>2021 Exam: A1(a) directly discusses the meaning of costs in various contexts.</li>
+                        <li>Sample Exam: Often references how "contribution vs. full cost" or "direct vs. indirect cost" plays into decision making (Section A in the sample exam).</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Variance Analysis and Budgeting</strong>
+                    <ul>
+                        <li>2021 Exam: A1(b) specifically addresses the nature of variances and how to interpret "favourable variance." A2 also includes part (b) about budgeting (cash budget for 6 months).</li>
+                        <li>Sample Exam: Multiple parts talk about "All variances should be investigated," "flexing the budget," standard cost variances (e.g., in Section A, A1(b)–(d), also in A2 for the sample exam).</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Capital Investment Appraisal (NPV, Payback, Possibly IRR)</strong>
+                    <ul>
+                        <li>2021 Exam: A2 requires net present value (NPV), payback period; B1 compares payback to IRR.</li>
+                        <li>Sample Exam: Section A's second big question (A2) also involves NPV with a multi-year project, plus discount tables, cost of capital, residual values, etc.</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Budgeting Systems, Behavioral Implications, and Motivational Issues</strong>
+                    <ul>
+                        <li>2021 Exam: A2(b) (the second question in A2) references managers' targets, staff motivation, and bonuses. Section B2 also focuses on the role of budgets, limiting factors, etc.</li>
+                        <li>Sample Exam: Section B1 is <em>all</em> about the nature, purposes, and behavioral implications of budgeting systems.</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Standard Costing & Variance Reconciliation</strong>
+                    <ul>
+                        <li>2021 Exam: Section C1 is explicitly about standard cost variance analysis, reconciling budgeted vs. actual profit.</li>
+                        <li>Sample Exam: Variation of standard costing/variance analysis in sections A1(b)(c)(d) and A2(C) or (D).</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Break‐Even / CVP Analysis</strong>
+                    <ul>
+                        <li>2021 Exam: Section C2 is a dedicated break-even question (calculating contribution margin, margin of safety, new branch, etc.).</li>
+                        <li>Sample Exam: CVP was also fundamental to "contribution" and "marginal costing" discussions (Week 4 in your notes). The sample exam doesn't have a big dedicated break-even question but <em>does</em> test marginal costing in short‐term decisions, so the principle is repeated.</li>
+                    </ul>
+                </li>
+            </ol>
+            
+            <p>Thus, the common repeated themes across <em>both</em> exams—and hence crucial for your revision—are:</p>
+            
+            <ul>
+                <li>Cost classification and relevance (e.g., which costs matter for decisions).</li>
+                <li>NPV / capital investment calculations.</li>
+                <li>Budgeting and variance analysis (including the nature of "favourable/adverse" variances).</li>
+                <li>Behavioral aspects of budgeting (motivation, target‐setting).</li>
+                <li>Standard costing (material, labour, overhead variances).</li>
+                <li>Marginal costing, CVP, and break-even considerations.</li>
+            </ul>
+            
+            <p>These repeated items <em>do</em> show up in both papers. So you'll want to prioritize mastering them for your <em>real</em> exam.</p>
+        </div>
+        
+        <div class="section" id="topics">
+            <h2>2. Topics of the Course Examined in the 2021 Paper</h2>
+            <p>Below is a question-by-question overview of the major topics tested.</p>
+            
+            <h3>Section A – Question A1</h3>
+            
+            <div class="question">
+                <h3>Question A1 (part A)</h3>
+                <p>"Discuss the meaning of Cost, in a varied context of managerial decision-making process."</p>
+            </div>
+            
+            <h3>Topics from Your Note</h3>
+            <div class="topic">
+                <ul>
+                    <li>Cost Classification & Relevance: direct vs. indirect, fixed vs. variable, relevant vs. irrelevant (sunk costs, opportunity cost).</li>
+                    <li>Short-term vs. Long-term usage of costs in decision making.</li>
+                </ul>
+            </div>
+            
+            <h3>Key Excerpts from Your Note</h3>
+            
+            <div class="excerpt">
+                <p><strong>Week 1</strong> "Meaning of cost, Idea about management accounting, Strategic management… … Full cost of a particular job:</p>
+                <ol>
+                    <li>Direct cost: be measured specifically in respect of the job.</li>
+                    <li>Indirect cost (Overheads): a share of the costs that create the environment in which production can take place, which do not relate specifically to any particular job.</li>
+                    <li>Fixed cost: sum of the costs that remain the same irrespective of the level of activity.</li>
+                    <li>Variable cost: vary according to the level of activity.</li>
+                    <li>Marginal cost: variable cost of providing/making one more unit."</li>
+                </ol>
+                
+                <p><strong>Week 6</strong> "Relevant cost conditions:</p>
+                <ol>
+                    <li>Must be a future cost (Historic cost is irrelevant).</li>
+                    <li>Must vary with the decision (Fixed cost is irrelevant if it cannot be changed)… Opportunity cost: the value of the opportunity foregone in order to pursue another course of action… Sunk cost: a cost that has already been incurred and cannot be recovered."</li>
+                </ol>
+            </div>
+            
+            <div class="question">
+                <h3>Question A1 (part B)</h3>
+                <p>"'A favourable variance indicates that a budget has been set appropriately.' Critique this statement and explain the nature of variances, and their role within budgeting."</p>
+            </div>
+            
+            <h3>Topics from Your Note</h3>
+            <div class="topic">
+                <ul>
+                    <li>Variance Analysis: interpreting "favourable" vs. "adverse" and why "favourable" does <em>not</em> necessarily mean "good."</li>
+                    <li>Budgeting & Control: how variances fit into feedback loops, potential inaccuracy of budgets.</li>
+                </ul>
+            </div>
+            
+            <h3>Key Excerpts from Your Note</h3>
+            
+            <div class="excerpt">
+                <p><strong>Week 9 (Variance & Budgetary Control)</strong> "Variance: Compare the budget financial figures for the month against the actual financial figure for the month.</p>
+                <ul>
+                    <li>Worse than budget => adverse/negative variance</li>
+                    <li>Better than budget => favourable/positive variance</li>
+                </ul>
+                <p>Some variances are relating to activity/volume causes, some to rate/speed causes… A 'favourable' variance does not necessarily mean that things are good; it may indicate overestimation in the budget.
+                'All variances should be investigated to find their cause… significant adverse variances and significant favourable variances might both warrant attention…'"</p>
+            </div>
+            
+            <h3>Section A – Question A2</h3>
+            
+            <div class="question">
+                <h3>Question A2 (25 marks)</h3>
+                <p>"Honest Diamonds Ltd (HD) is considering investing in a new project to extract diamonds from a newly found source located in caves in Australia.
+                Inspectors were hired two (2) years ago, and have spent eighteen (18) months assessing the potential of the caves, incurring £1.8 million cost. The inspection cost has not been paid yet, but will be paid at the end of Year 1. As a result of their analysis, the required new equipment's capital cost is estimated at £18.4 million, payable before operations begin, with residual value of £6.4 million at the end of the project in four years' time, when there are no more diamonds left to mine in the caves. Due to the nature of the market as well as the remarkable properties of the caves, the diamonds are cut into 5 gram (5g) portions. This will give merchants the ability to have one 25 carat diamond block which they can refine into their customers' unique preferences.
+                Estimates of revenues and costs arising from this project are:</p>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Year 1</th>
+                            <th>Year 2</th>
+                            <th>Year 3</th>
+                            <th>Year 4</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Sales price (£/portion)</td>
+                            <td>70,000</td>
+                            <td>75,000</td>
+                            <td>75,000</td>
+                            <td>80,000</td>
+                        </tr>
+                        <tr>
+                            <td>Sales volume (100g)</td>
+                            <td>21</td>
+                            <td>18</td>
+                            <td>16</td>
+                            <td>14</td>
+                        </tr>
+                        <tr>
+                            <td>Variable cost (£/portion)</td>
+                            <td>50,000</td>
+                            <td>50,000</td>
+                            <td>55,000</td>
+                            <td>60,000</td>
+                        </tr>
+                        <tr>
+                            <td>Depreciation of equipment (£m)</td>
+                            <td>-3</td>
+                            <td>-3</td>
+                            <td>-3</td>
+                            <td>-3</td>
+                        </tr>
+                        <tr>
+                            <td>Head office costs (£m)</td>
+                            <td>-0.9</td>
+                            <td>-0.9</td>
+                            <td>-0.9</td>
+                            <td>-0.9</td>
+                        </tr>
+                        <tr>
+                            <td>Inspection Costs (£m)</td>
+                            <td>-1.8</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Interest payments (£m)</td>
+                            <td>-3</td>
+                            <td>-3</td>
+                            <td>-3</td>
+                            <td>-3</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <p>If the project goes ahead, sales of other existing products will be lost resulting in a loss of contribution of £15 million a year, over the life of the project. HD's accountant has informed you that the head office costs include £600,000 for managing this new project, and £300,000 which accounts for a fair apportionment of the total overheads of the company. A separate study has indicated that if the new equipment is bought, additional overheads, including equipment depreciation, arising from mining the diamonds would be £4.5 million a year. Once the project is finished, HD have been instructed by the local authorities to restore the surrounding environment to a satisfactory standard at least equal to that when it was discovered. It is estimated the cost for this will be £2.2 million, and is to be paid at the end of Year 5.
+                Production would require additional working capital of £30 million immediately and from Year 2, it will increase each year by a further £5 million. The working capital is used until the end of the 4 years and is then no longer required to support the project. The business has a cost of capital of 8%.
+                For the purposes of your calculations, ignore taxation.</p>
+                
+                <p>Required: a) Calculate the net present value for the project. In so doing, clearly show the annual cash flows (and their break down) associated with this project. Use the discount table (three decimal places) provided at the end of the exam script. <em>Do not</em> use the auto function in Excel. Show your calculations and present your answer in £ million to two decimal places where relevant. (10 marks)
+                Calculate the payback period for the project (to two decimal places) and show your full workings. (2 marks)</p>
+                
+                <hr class="question-divider">
+                
+                <h3>Question A2 (Part B):</h3>
+                
+                <p>Hospitablet Ltd manufactures small electronic scanning tablets for use in medical institutions. It is starting to prepare its budget for the six months commencing 1st July 2022. In each month in recent times, the company has sold 60 tablets per month at a price of £4,000 each. Tablets purchased by the company from its supplier cost £2,500 each. The company anticipates that at the beginning of July 2022, it will have an overdraft of £90,000.
+                The company has just been advised that a new model of tablet has just been released and they will be receiving this latest model. This new model has 1.5 times more processing power than the current model. The purchase cost from the supplier is expected to increase by 10%, and the company has decided to sell these new tablets for 15% more than the current model is sold for. From the beginning of July, sales are expected to increase consistently at a rate of 30 machines each month through until the end of December 2022. Monthly operating costs in recent times have been £6,000 but it is anticipated that this amount will increase to £7,000 for July 2022, followed by additional increases in subsequent months. Operating costs are forecast as follows:</p>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>July</th>
+                            <th>August</th>
+                            <th>September</th>
+                            <th>October</th>
+                            <th>November</th>
+                            <th>December</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Operating costs</td>
+                            <td>7,000</td>
+                            <td>10,000</td>
+                            <td>13,000</td>
+                            <td>15,000</td>
+                            <td>15,000</td>
+                            <td>15,000</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <p>Note: These costs include depreciation of £3,000 a month.</p>
+                
+                <p>Payment from customers are always on cash basis, and cash is received in the month of sales. The suppliers of the tablets have not been offering credit to the company yet, but will offer one (1) month's credit with purchases in October 2022 and thereafter. Operating costs are payable in the following month. As a result of growing concern regarding potential cyber-attacks, a new security software will be bought in and installed in September 2022, costing £150,000. A tax bill of £550,000 will be received at the end of December 2022, and is expected to be paid two (2) months later. Hospitablet plans to offer a £10,000 cash bonus to each of their ten (10) senior staff in September to thank them for their hard work and another successful year.</p>
+                
+                <p>Required: a) Prepare a cash budget for the six months ending 31st December 2022 which shows the monthly cash flows and the cash balance at the end of each month. Show your calculations and answer to zero (0) decimal places. (6 marks)
+                b) Looking further ahead, for the 2023 budget, the Chief Executive Officer (CEO) has asked the Chief Financial Officer (CFO) to set extremely challenging targets for senior managers to further motivate them. The CEO has stated that "this will keep staff working hard, whilst reducing the number of bonuses given out". Comment on the implications of this approach, and any suggestions that could help the CFO. (7 marks)"</p>
+            </div>
+            
+            <h3>Topics from Your Note</h3>
+            <div class="topic">
+                <ol>
+                    <li>Capital Budgeting: NPV, discounting, payback period, relevant/irrelevant costs (sunk inspection fee, lost contribution, overheads, environment restoration, working capital, etc.).</li>
+                    <li>Short-Term Budgeting: monthly cash budgets, changes in sales volume and unit cost, timing of payments/receipts, operating cost patterns.</li>
+                    <li>Behavioral Aspects: extremely challenging targets → potential motivational or dysfunctional outcomes.</li>
+                </ol>
+            </div>
+            
+            <h3>Key Excerpts from Your Note</h3>
+            
+            <div class="excerpt">
+                <p><strong>Week 6 (Relevant Costing):</strong> "When considering a proposed course of action, not all costs are relevant. Sunk costs (like older inspection fees) do not vary with the decision, so they should be excluded. Opportunity cost (lost contribution) should be included if that resource or time is redeployed."</p>
+                
+                <p><strong>Week 7 (CAPEX: NPV, Payback):</strong> "NPV: sum of the present values of future net cash flows minus the initial outlay… If NPV > 0, the project meets or exceeds the required rate of return… Payback: how long it takes for the cash investment to be returned by net inflows. It does <em>not</em> consider the time value of money.
+                Working capital is typically recovered at the end of the project… Restoration or disposal costs at the end of a project must be accounted for in the relevant year's cash flows. … The cost of capital is used to discount future cash flows to their present values."</p>
+                
+                <p><strong>Week 8 (Budgeting):</strong> "Cash budget: we record inflows (sales receipts) and outflows (purchases, operating costs, tax, etc.) for each month. Payment timing is crucial, e.g., if suppliers offer credit from a certain month.
+                Behavioral: extremely high targets can lead to demotivation or short-term 'gaming' of results. Conversely, too lenient targets create slack. Balanced, 'challenging but achievable' budgets often yield the best motivation."</p>
+            </div>
+            
+            <h3>Section B</h3>
+            
+            <div class="question">
+                <h3>Question B1 (Part A):</h3>
+                <p>"'Payback is a better capital investment appraisal method than the Internal Rate of Return.' Required: Critique the statement immediately above. In so doing explain the nature and purpose of each of the two (2) methods referred to, and contrast them in terms of relative strengths and weaknesses."</p>
+            </div>
+            
+            <h3>Topics from Your Note</h3>
+            <div class="topic">
+                <ul>
+                    <li>Capital Appraisal Methods: payback vs. IRR.</li>
+                    <li>Strengths/weaknesses of each (time value of money, post-payback cash flows, multiple IRRs, etc.). Payback is simple but ignores time value of money and post-payback cash flows. IRR accounts for the time value of money but can be misleading if multiple sign changes exist.</li>
+                </ul>
+            </div>
+            
+            <h3>Key Excerpts from Your Note</h3>
+            
+            <div class="excerpt">
+                <p><strong>Week 7</strong> "Payback: how long it takes for the cash investment to be recovered. No consideration of time value or post-payback returns. IRR: the discount rate at which NPV=0. It <em>does</em> consider time value. However, multiple IRRs can arise with unconventional cash flows. NPV is typically considered the best method, though IRR is still more sophisticated than payback in factoring in discounting."</p>
+            </div>
+            
+            <div class="question">
+                <h3>Question B1 (Part B):</h3>
+                <p>"You overhear an entrepreneur say to their accountant: 'In order to make the highest profit, it is necessary to outsource as much as possible, and the full costing method is very appropriate when determining the outsourcing cost. Also, full costing is better suited than marginal analysis for dealing with qualitative costs and benefits... so the answer always lies in the full cost.' Required: Critique the statement immediately above. In so doing, explain the nature of outsourcing in the contexts of Full Costing and Cost Volume Profit analysis."</p>
+            </div>
+            
+            <h3>Topics from Your Note</h3>
+            <div class="topic">
+                <ul>
+                    <li>Outsourcing: whether to produce internally vs. buy externally.</li>
+                    <li>Full (absorption) Costing vs. Marginal Costing: short-run relevant costs vs. overhead allocations, plus intangible factors (quality, supplier reliability).</li>
+                </ul>
+            </div>
+            
+            <h3>Key Excerpts from Your Note</h3>
+            
+            <p><strong>Week 4 (Marginal vs. Full Costing)</strong> "Marginal costing only includes variable costs in product costs. Full costing includes both variable and fixed costs. For outsourcing decisions, we need to consider which costs would be avoided if we outsourced (relevant costs). Fixed costs that would continue regardless should be excluded from the decision. Qualitative factors (quality control, reliability, strategic importance) must be considered alongside the quantitative analysis."</p>
+            
+            <p><strong>Week 6 (Relevant Costing)</strong> "For make-or-buy decisions, we compare the relevant costs of internal production with the external purchase price. Allocated overheads that would continue regardless are not relevant. The statement that 'full costing is better for qualitative factors' is incorrect—qualitative factors must be considered separately from either costing method."</p>
+            </div>
+            
+            <div class="question">
+                <h3>Question B2:</h3>
+                <p>"'Budgets are a waste of time. They are based on guesswork, and they are always wrong. They are also a tool for senior managers to control junior managers, and they are a source of conflict. They are not worth the effort.' Required: Critique the statement immediately above. In so doing, identify the need and drivers for, and the role of a budget in an organisation, and describe the process of setting up a budget."</p>
+            </div>
+            
+            <h3>Topics from Your Note</h3>
+            <div class="topic">
+                <ul>
+                    <li>Purposes of Budgeting: planning, coordination, communication, control, motivation.</li>
+                    <li>Behavioral Aspects: potential for conflict, gaming, but also benefits of goal alignment.</li>
+                    <li>Budgeting Approaches: traditional vs. alternative approaches (e.g., rolling forecasts, beyond budgeting).</li>
+                </ul>
+            </div>
+            
+            <h3>Key Excerpts from Your Note</h3>
+            
+            <div class="excerpt">
+                <p><strong>Week 8 (Budgeting)</strong> "Budgets serve multiple purposes: planning, coordination, communication, control, motivation, and performance evaluation. While forecasts involve uncertainty, they are not mere 'guesswork' but informed estimates based on historical data, market research, and strategic plans.</p>
+                
+                <p>Behavioral issues: Budgets can create tension between control and motivation. They can lead to budget gaming, building slack, or short-termism. However, when implemented well, they align individual goals with organizational objectives.</p>
+                
+                <p>Alternative approaches: Beyond Budgeting advocates more adaptive processes. Rolling forecasts provide more current information. Activity-Based Budgeting links resources to activities and outputs."</p>
+            </div>
+            
+            <h3>Section C</h3>
+            
+            <div class="question">
+                <h3>Question C1:</h3>
+                <p>"Mango Ltd manufactures a single product. The standard cost card for one unit of the product is as follows:</p>
+                
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>Direct materials: 5 kg at £8 per kg</td>
+                            <td>£40</td>
+                        </tr>
+                        <tr>
+                            <td>Direct labour: 3 hours at £12 per hour</td>
+                            <td>£36</td>
+                        </tr>
+                        <tr>
+                            <td>Variable production overhead: 3 hours at £4 per hour</td>
+                            <td>£12</td>
+                        </tr>
+                        <tr>
+                            <td>Fixed production overhead: 3 hours at £6 per hour</td>
+                            <td>£18</td>
+                        </tr>
+                        <tr>
+                            <td>Total standard cost</td>
+                            <td>£106</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <p>Budgeted production and sales for April 2021 were 5,000 units. The budgeted selling price was £150 per unit. The actual results for April 2021 were as follows:</p>
+                
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>Production</td>
+                            <td>4,800 units</td>
+                        </tr>
+                        <tr>
+                            <td>Sales</td>
+                            <td>4,600 units at £152 per unit</td>
+                        </tr>
+                        <tr>
+                            <td>Direct materials purchased and used</td>
+                            <td>25,000 kg at £7.80 per kg</td>
+                        </tr>
+                        <tr>
+                            <td>Direct labour</td>
+                            <td>15,000 hours at £11.80 per hour</td>
+                        </tr>
+                        <tr>
+                            <td>Variable production overhead</td>
+                            <td>£58,000</td>
+                        </tr>
+                        <tr>
+                            <td>Fixed production overhead</td>
+                            <td>£92,000</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <p>Required: a) Calculate the following variances for April 2021:</p>
+                <ol>
+                    <li>Sales price variance (2 marks)</li>
+                    <li>Sales volume profit variance (2 marks)</li>
+                    <li>Direct material price variance (2 marks)</li>
+                    <li>Direct material usage variance (2 marks)</li>
+                    <li>Direct labour rate variance (2 marks)</li>
+                    <li>Direct labour efficiency variance (2 marks)</li>
+                    <li>Variable production overhead expenditure variance (2 marks)</li>
+                    <li>Variable production overhead efficiency variance (2 marks)</li>
+                    <li>Fixed production overhead expenditure variance (2 marks)</li>
+                    <li>Fixed production overhead volume variance (2 marks)</li>
+                </ol>
+                <p>b) Prepare a statement that reconciles the budgeted profit with the actual profit for April 2021. (5 marks)</p>
+            </div>
+            
+            <h3>Topics from Your Note</h3>
+            <div class="topic">
+                <ul>
+                    <li>Standard Costing: setting standards for materials, labor, and overheads.</li>
+                    <li>Variance Analysis: calculating and interpreting price/rate, usage/efficiency, and volume variances.</li>
+                    <li>Reconciliation: connecting budgeted profit to actual profit via variances.</li>
+                </ul>
+            </div>
+            
+            <h3>Key Excerpts from Your Note</h3>
+            
+            <div class="excerpt">
+                <p><strong>Week 9 (Standard Costing & Variance Analysis)</strong> "Standard costing establishes predetermined costs for products. Variances measure deviations from these standards:</p>
+                <ul>
+                    <li>Material price variance = (Standard price – Actual price) × Actual quantity</li>
+                    <li>Material usage variance = (Standard quantity – Actual quantity) × Standard price</li>
+                    <li>Labour rate variance = (Standard rate – Actual rate) × Actual hours</li>
+                    <li>Labour efficiency variance = (Standard hours – Actual hours) × Standard rate</li>
+                    <li>Variable overhead expenditure variance = (Standard rate – Actual rate) × Actual hours</li>
+                    <li>Variable overhead efficiency variance = (Standard hours – Actual hours) × Standard rate</li>
+                    <li>Fixed overhead expenditure variance = Budgeted fixed overhead – Actual fixed overhead</li>
+                    <li>Fixed overhead volume variance = (Actual production – Budgeted production) × Standard fixed overhead rate per unit</li>
+                    <li>Sales price variance = (Actual price – Standard price) × Actual quantity</li>
+                    <li>Sales volume profit variance = (Actual quantity – Budgeted quantity) × Standard profit per unit</li>
+                </ul>
+                <p>Reconciliation: Budgeted profit + Favourable variances – Adverse variances = Actual profit"</p>
+            </div>
+            
+            <div class="question">
+                <h3>Question C2:</h3>
+                <p>"Pear Ltd manufactures and sells a single product. The following information relates to the company's activities:</p>
+                
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>Selling price per unit</td>
+                            <td>£100</td>
+                        </tr>
+                        <tr>
+                            <td>Variable cost per unit</td>
+                            <td>£60</td>
+                        </tr>
+                        <tr>
+                            <td>Fixed costs per month</td>
+                            <td>£80,000</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <p>Required: a) Calculate the following:</p>
+                <ol>
+                    <li>Contribution per unit (1 mark)</li>
+                    <li>Contribution to sales ratio (1 mark)</li>
+                    <li>Break-even point in units (2 marks)</li>
+                    <li>Break-even point in sales value (2 marks)</li>
+                    <li>Margin of safety in units, if the company expects to sell 3,000 units per month (2 marks)</li>
+                    <li>Margin of safety as a percentage of expected sales (2 marks)</li>
+                </ol>
+                <p>b) The company is considering opening a new branch. The new branch would incur additional fixed costs of £30,000 per month. The selling price and variable cost per unit would remain unchanged. Calculate the revised break-even point in units for the company as a whole. (3 marks)</p>
+                <p>c) The company is considering a proposal to increase the selling price to £110 per unit. It is estimated that this would result in a 10% reduction in the number of units sold. Calculate the effect of this proposal on the company's monthly profit, assuming that the company currently sells 3,000 units per month. (5 marks)</p>
+                <p>d) The company is considering a proposal to reduce the selling price to £90 per unit. It is estimated that this would result in a 20% increase in the number of units sold. Calculate the effect of this proposal on the company's monthly profit, assuming that the company currently sells 3,000 units per month. (5 marks)</p>
+                <p>e) The company is considering a proposal to spend an additional £10,000 per month on advertising. It is estimated that this would result in a 15% increase in the number of units sold. Calculate the effect of this proposal on the company's monthly profit, assuming that the company currently sells 3,000 units per month. (5 marks)</p>
+            </div>
+            
+            <h3>Topics from Your Note</h3>
+            <div class="topic">
+                <ul>
+                    <li>Cost-Volume-Profit (CVP) Analysis: contribution margin, break-even point, margin of safety.</li>
+                    <li>Sensitivity Analysis: impact of changes in price, volume, fixed costs on profit.</li>
+                    <li>Decision Making: evaluating alternative scenarios (price changes, advertising investment).</li>
+                </ul>
+            </div>
+            
+            <h3>Key Excerpts from Your Note</h3>
+            
+            <div class="excerpt">
+                <p><strong>Week 4 (CVP Analysis)</strong> "Contribution = Selling price – Variable cost per unit</p>
+                <p>Contribution to sales ratio = (Contribution per unit ÷ Selling price) × 100%</p>
+                <p>Break-even point (units) = Fixed costs ÷ Contribution per unit</p>
+                <p>Break-even point (sales value) = Fixed costs ÷ Contribution to sales ratio</p>
+                <p>Margin of safety (units) = Expected sales (units) – Break-even sales (units)</p>
+                <p>Margin of safety (%) = (Margin of safety in units ÷ Expected sales in units) × 100%</p>
+                <p>When evaluating changes (price, volume, fixed costs), we recalculate the contribution and compare the new profit with the original profit."</p>
+            </div>
+        </div>
+        <div class="section" id="excerpts">
+            <h2>3. Excerpts From Your MSIN0059 Note</h2>
+            
+            <p>Here are <em>original</em> quotations from your note that match the 2021 exam questions. (Headings reference the relevant note sections.)</p>
+            
+            <h3>A. Cost Concepts & Relevance (Week 1 + Week 6)</h3>
+            
+            <div class="excerpt">
+                <p>"Meaning of cost, Idea about management accounting… … Full cost of a particular job:<br><br>
+                1. Direct cost: measured specifically in respect of the job.<br>
+                2. Indirect cost (Overheads): a share of the costs that create the environment in which production can take place, not specific to any particular job.<br>
+                3. Fixed cost: remains the same irrespective of the level of activity.<br>
+                4. Variable cost: vary according to the level of activity.<br>
+                5. Marginal cost: the variable cost of providing/making one more unit."</p>
+            </div>
+            
+            <div class="excerpt">
+                <p>"Relevant cost conditions:<br><br>
+                1. Must be a future cost (Historic cost is irrelevant).<br>
+                2. Must vary with the decision. Opportunity cost: the value of the opportunity foregone… Sunk cost: cost already incurred; cannot be recovered."</p>
+            </div>
+            
+            <h3>B. Variance Analysis & Role in Budgeting (Week 9)</h3>
+            
+            <div class="excerpt">
+                <p>"Variance: Compare the budget financial figures for the month against the actual.<br><br>
+                • Worse than budget => adverse/negative variance<br>
+                • Better than budget => favourable/positive variance<br>
+                Some variances relate to volume, some
+                • Worse than budget => adverse/negative variance<br>
+                • Better than budget => favourable/positive variance<br>
+                Some variances relate to volume, some to rate/speed causes… A 'favourable' variance does not necessarily mean that things are good; it may indicate overestimation in the budget.
+                'All variances should be investigated to find their cause… significant adverse variances and significant favourable variances might both warrant attention…'"</p>
+            </div>
+            
+            <h3>C. Capital Investment Appraisal (Week 7)</h3>
+            
+            <div class="excerpt">
+                <p>"NPV: sum of the present values of future net cash flows minus the initial outlay… If NPV > 0, the project meets or exceeds the required rate of return… Payback: how long it takes for the cash investment to be returned by net inflows. It does <em>not</em> consider the time value of money.
+                Working capital is typically recovered at the end of the project… Restoration or disposal costs at the end of a project must be accounted for in the relevant year's cash flows. … The cost of capital is used to discount future cash flows to their present values."</p>
+            </div>
+            
+            <div class="excerpt">
+                <p>"IRR: the discount rate at which NPV=0. It <em>does</em> consider time value. However, multiple IRRs can arise with unconventional cash flows. NPV is typically considered the best method, though IRR is still more sophisticated than payback in factoring in discounting."</p>
+            </div>
+            
+            <h3>D. Budgeting (Week 8)</h3>
+            
+            <div class="excerpt">
+                <p>"Budget: a short-term financial plan for the business… used for control and to motivate performance. If a limiting factor exists (e.g. materials or labor), the <em>entire</em> budget must revolve around that constraint.
+                'Incremental budgeting' vs. 'Zero-base budgeting' are two contrasting approaches; each has pros and cons regarding accuracy, effort, time, and cost."</p>
+            </div>
+            
+            <div class="excerpt">
+                <p>"Cash budget: we record inflows (sales receipts) and outflows (purchases, operating costs, tax, etc.) for each month. Payment timing is crucial, e.g., if suppliers offer credit from a certain month.
+                Behavioral: extremely high targets can lead to demotivation or short-term 'gaming' of results. Conversely, too lenient targets create slack. Balanced, 'challenging but achievable' budgets often yield the best motivation."</p>
+            </div>
+            
+            <h3>E. Full vs. Marginal Costing (Weeks 2-4)</h3>
+            
+            <div class="excerpt">
+                <p>"Traditional full recovery costing tries to share out overhead across units produced. However, for short-term decisions like outsourcing, <em>relevant cost</em> often includes <em>only</em> variable cost (and any avoidable fixed cost).
+                Qualitative issues like reliability and quality are crucial but not specifically the domain of either full or marginal costing. They must be assessed separately.
+                Marginal costing focuses on contribution and is often more suitable for short-term decisions (like special orders or partial outsourcing). Full costing can be more relevant when deciding on long-run pricing or total cost coverage."</p>
+            </div>
+            
+            <h3>F. Break-Even Analysis (Week 4)</h3>
+            
+            <div class="excerpt">
+                <p>"Breakeven: Fixed costs ÷ (Unit selling price − Unit variable cost).
+                Margin of safety = (Current sales − Breakeven) / Current sales.
+                Limitations of CVP (BEP) analysis:<br><br>
+                • Non-linear relationships between cost/revenue and volume…<br>
+                • Possible step changes in fixed cost…<br>
+                • Assumes a single product or fixed sales mix…<br>
+                • Only relevant short-term, ignoring time value of money."</p>
+            </div>
+        </div>
+        
+        <div class="section" id="table">
+            <h2>4. Question-Topic-Note Excerpt Table</h2>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Question</th>
+                        <th>Topic</th>
+                        <th>Note Excerpt</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>A1(a) - Meaning of Cost</td>
+                        <td>Cost Classification</td>
+                        <td>"Direct cost: measured specifically in respect of the job. Indirect cost (Overheads): a share of the costs that create the environment in which production can take place..."</td>
+                    </tr>
+                    <tr>
+                        <td>A1(b) - Favourable Variance</td>
+                        <td>Variance Analysis</td>
+                        <td>"A 'favourable' variance does not necessarily mean that things are good; it may indicate overestimation in the budget."</td>
+                    </tr>
+                    <tr>
+                        <td>A2 - Diamond Project</td>
+                        <td>Capital Investment Appraisal</td>
+                        <td>"NPV: sum of the present values of future net cash flows minus the initial outlay... Working capital is typically recovered at the end of the project..."</td>
+                    </tr>
+                    <tr>
+                        <td>A2 - Hospitablet Ltd</td>
+                        <td>Cash Budgeting</td>
+                        <td>"Cash budget: we record inflows (sales receipts) and outflows (purchases, operating costs, tax, etc.) for each month. Payment timing is crucial..."</td>
+                    </tr>
+                    <tr>
+                        <td>B1(a) - Payback vs. IRR</td>
+                        <td>Investment Appraisal Methods</td>
+                        <td>"Payback: how long it takes for the cash investment to be returned. No consideration of time value or post-payback returns. IRR: the discount rate at which NPV=0..."</td>
+                    </tr>
+                    <tr>
+                        <td>B1(b) - Outsourcing & Full Cost</td>
+                        <td>Full vs. Marginal Costing</td>
+                        <td>"For short-term decisions like outsourcing, relevant cost often includes only variable cost (and any avoidable fixed cost)..."</td>
+                    </tr>
+                    <tr>
+                        <td>B2 - Budget & Limiting Factor</td>
+                        <td>Budgeting Purpose</td>
+                        <td>"If a limiting factor exists (e.g. materials or labor), the entire budget must revolve around that constraint..."</td>
+                    </tr>
+                    <tr>
+                        <td>C1 - Dexter Ltd</td>
+                        <td>Standard Costing & Variances</td>
+                        <td>"Material Price Variance = (Std price − Actual price) × Actual quantity... Flexing the budget: rework the budget figures to the actual output level..."</td>
+                    </tr>
+                    <tr>
+                        <td>C2 - Burrito Brothers</td>
+                        <td>Break-Even Analysis</td>
+                        <td>"Breakeven: Fixed costs ÷ (Unit selling price − Unit variable cost). Margin of safety = (Current sales − Breakeven) / Current sales..."</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="section" id="summary-boxes">
+            <h2>5. Summary Boxes</h2>
+            <p>Below are summary boxes for each major topic area tested in the 2021 exam, with key concepts and formulas you should focus on.</p>
+            
+            <div class="summary-box">
+                <h3>Box 1: Marginal vs. Absorption Costing</h3>
+                <button class="toggle-btn">Hide Details</button>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ASPECT</th>
+                            <th>MARGINAL COSTING</th>
+                            <th>ABSORPTION COSTING</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Definition</td>
+                            <td>Only variable costs are charged to products; fixed costs are period expenses.</td>
+                            <td>Both variable and fixed production costs are assigned to units.</td>
+                        </tr>
+                        <tr>
+                            <td>Fixed Costs Treatment</td>
+                            <td>Expensed in the period incurred.</td>
+                            <td>Included in inventory cost and expensed when sold.</td>
+                        </tr>
+                        <tr>
+                            <td>Usefulness</td>
+                            <td>Helpful for short-term decisions: shutdowns, limiting factor analysis, make-or-buy, pricing.</td>
+                            <td>Required for external reporting under accounting standards.</td>
+                        </tr>
+                        <tr>
+                            <td>Managerial Decision-Making</td>
+                            <td>Provides clear contribution margin.</td>
+                            <td>May distort profitability when production ≠ sales.</td>
+                        </tr>
+                        <tr>
+                            <td>Inventory Valuation Impact</td>
+                            <td>Lower profit when inventory increases.</td>
+                            <td>Higher profit when inventory increases (fixed OH deferred).</td>
+                        </tr>
+                        <tr>
+                            <td>Limitations</td>
+                            <td>Ignores long-term sustainability (total cost recovery).</td>
+                            <td>May lead to dysfunctional decisions (e.g., overproduction to increase profit).</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="exam-ref">
+                    <p>📌 Exam Questions Covered: A1(a), C2(a), B2, C1(b)</p>
+                    <p>📚 Section(s): A1, B2, C1, C2</p>
+                </div>
+            </div>
+            
+            <!-- Other summary boxes with similar structure -->
+            <div class="summary-box">
+                <h3>Box 2: Cost Classification & Relevance</h3>
+                <button class="toggle-btn">Hide Details</button>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>COST TYPE</th>
+                            <th>DEFINITION</th>
+                            <th>RELEVANCE TO DECISIONS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Direct Costs</td>
+                            <td>Can be traced to specific products/services</td>
+                            <td>Relevant for product costing and pricing</td>
+                        </tr>
+                        <tr>
+                            <td>Indirect Costs</td>
+                            <td>Cannot be directly traced to products</td>
+                            <td>Allocation needed; may be irrelevant for short-term decisions</td>
+                        </tr>
+                        <tr>
+                            <td>Fixed Costs</td>
+                            <td>Don't change with activity level</td>
+                            <td>Often irrelevant for short-term decisions unless avoidable</td>
+                        </tr>
+                        <tr>
+                            <td>Variable Costs</td>
+                            <td>Change proportionally with activity</td>
+                            <td>Usually relevant for most decisions</td>
+                        </tr>
+                        <tr>
+                            <td>Sunk Costs</td>
+                            <td>Already incurred; cannot be recovered</td>
+                            <td>Always irrelevant for future decisions</td>
+                        </tr>
+                        <tr>
+                            <td>Opportunity Costs</td>
+                            <td>Value of foregone alternatives</td>
+                            <td>Relevant but not recorded in accounting systems</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="exam-ref">
+                    <p>📌 Exam Questions Covered: A1(a), B1(b)</p>
+                    <p>📚 Section(s): A1, B1</p>
+                </div>
+            </div>
+            
+            <div class="summary-box">
+                <h3>Box 3: Capital Investment Appraisal Methods</h3>
+                <button class="toggle-btn">Hide Details</button>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>METHOD</th>
+                            <th>DESCRIPTION</th>
+                            <th>ADVANTAGES</th>
+                            <th>DISADVANTAGES</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Net Present Value (NPV)</td>
+                            <td>Sum of discounted future cash flows minus initial investment</td>
+                            <td>Considers time value of money; accounts for all cash flows</td>
+                            <td>More complex calculations; requires accurate discount rate</td>
+                        </tr>
+                        <tr>
+                            <td>Payback Period</td>
+                            <td>Time to recover initial investment</td>
+                            <td>Simple to calculate; focuses on liquidity</td>
+                            <td>Ignores time value of money; ignores post-payback cash flows</td>
+                        </tr>
+                        <tr>
+                            <td>Internal Rate of Return (IRR)</td>
+                            <td>Discount rate at which NPV equals zero</td>
+                            <td>Considers time value; gives percentage return</td>
+                            <td>Multiple IRRs possible; may conflict with NPV for mutually exclusive projects</td>
+                        </tr>
+                        <tr>
+                            <td>Accounting Rate of Return</td>
+                            <td>Average profit ÷ Average investment</td>
+                            <td>Uses familiar accounting measures</td>
+                            <td>Ignores time value; based on profit not cash flow</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="exam-ref">
+                    <p>📌 Exam Questions Covered: A2, B1(a)</p>
+                    <p>📚 Section(s): A2, B1</p>
+                </div>
+            </div>
+            
+            <div class="summary-box">
+                <h3>Box 4: Variance Analysis Framework</h3>
+                <button class="toggle-btn">Hide Details</button>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>VARIANCE TYPE</th>
+                            <th>FORMULA</th>
+                            <th>INTERPRETATION</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Material Price</td>
+                            <td>(Std price − Actual price) × Actual quantity</td>
+                            <td>Difference due to paying different price than standard</td>
+                        </tr>
+                        <tr>
+                            <td>Material Usage</td>
+                            <td>(Std quantity for actual output − Actual quantity) × Std price</td>
+                            <td>Difference due to using different quantity than standard</td>
+                        </tr>
+                        <tr>
+                            <td>Labor Rate</td>
+                            <td>(Std rate − Actual rate) × Actual hours</td>
+                            <td>Difference due to paying different rate than standard</td>
+                        </tr>
+                        <tr>
+                            <td>Labor Efficiency</td>
+                            <td>(Std hours for actual output − Actual hours) × Std rate</td>
+                            <td>Difference due to using different hours than standard</td>
+                        </tr>
+                        <tr>
+                            <td>Fixed Overhead Expenditure</td>
+                            <td>Budgeted fixed overhead − Actual fixed overhead</td>
+                            <td>Difference between budgeted and actual fixed overhead spending</td>
+                        </tr>
+                        <tr>
+                            <td>Sales Price</td>
+                            <td>(Actual price − Std price) × Actual volume</td>
+                            <td>Difference due to selling at different price than standard</td>
+                        </tr>
+                        <tr>
+                            <td>Sales Volume</td>
+                            <td>(Actual volume − Budgeted volume) × Std contribution</td>
+                            <td>Difference due to selling different volume than budgeted</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="exam-ref">
+                    <p>📌 Exam Questions Covered: A1(b), C1</p>
+                    <p>📚 Section(s): A1, C1</p>
+                </div>
+            </div>
+            
+            <div class="summary-box">
+                <h3>Box 5: Break-Even Analysis</h3>
+                <button class="toggle-btn">Hide Details</button>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>CONCEPT</th>
+                            <th>FORMULA</th>
+                            <th>PURPOSE</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Break-Even Point (units)</td>
+                            <td>Fixed Costs ÷ Contribution per unit</td>
+                            <td>Volume needed to cover all costs (zero profit)</td>
+                        </tr>
+                        <tr>
+                            <td>Break-Even Point (value)</td>
+                            <td>Fixed Costs ÷ Contribution ratio</td>
+                            <td>Sales value needed to cover all costs</td>
+                        </tr>
+                        <tr>
+                            <td>Contribution Margin</td>
+                            <td>Selling price − Variable cost per unit</td>
+                            <td>Amount each unit contributes to fixed costs and profit</td>
+                        </tr>
+                        <tr>
+                            <td>Contribution Ratio</td>
+                            <td>Contribution ÷ Sales × 100%</td>
+                            <td>Percentage of sales that contributes to fixed costs and profit</td>
+                        </tr>
+                        <tr>
+                            <td>Margin of Safety</td>
+                            <td>(Current sales − Break-even sales) ÷ Current sales × 100%</td>
+                            <td>How far sales can fall before losses occur</td>
+                        </tr>
+                        <tr>
+                            <td>Target Profit Volume</td>
+                            <td>(Fixed costs + Target profit) ÷ Contribution per unit</td>
+                            <td>Volume needed to achieve desired profit</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="exam-ref">
+                    <p>📌 Exam Questions Covered: C2</p>
+                    <p>📚 Section(s): C2</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section" id="conclusion">
+            <h2>6. Conclusion: How to Prepare for a Similar Exam</h2>
+            
+            <p>Based on the 2021 exam paper, here are key strategies to prepare for a similar exam:</p>
+            
+            <div class="conclusion-item">
+                <h3>Focus on Calculation Skills</h3>
+                <p>The 2021 exam requires you to:</p>
+                <ul>
+                    <li>Calculate and interpret NPV for investment decisions</li>
+                    <li>Prepare variance analysis and reconciliations</li>
+                    <li>Calculate break-even points and related metrics</li>
+                    <li>Prepare cash budgets</li>
+                </ul>
+            </div>
+            
+            <div class="conclusion-item">
+                <h3>Understand Theory & Critique</h3>
+                <p>Several questions ask you to critique statements, requiring deeper understanding:</p>
+                <ul>
+                    <li>Advantages/disadvantages of different methods</li>
+                    <li>When certain approaches are appropriate/inappropriate</li>
+                    <li>Behavioral implications of accounting systems</li>
+                </ul>
+            </div>
+            
+            <div class="conclusion-item">
+                <h3>Time Management</h3>
+                <p>The exam has a mix of calculation and discussion questions:</p>
+                <ul>
+                    <li>Section A: Longer, more complex questions (25 marks each)</li>
+                    <li>Section B: Discussion/critique questions (25 marks each)</li>
+                    <li>Section C: Calculation-heavy questions (25 marks each)</li>
+                </ul>
+            </div>
+            
+            <div class="conclusion-item">
+                <h3>Exam Structure</h3>
+                <p>Based on the 2021 paper, expect:</p>
+                <ul>
+                    <li>3 sections (A, B, C) with 2 questions each</li>
+                    <li>Need to answer 1 from each section (3 questions total)</li>
+                    <li>Each question worth 25 marks (75 marks total)</li>
+                    <li>Mix of calculation and discussion components</li>
+                </ul>
+            </div>
+            
+            <p>In summary, the 2021 exam shows a clear pattern of testing both technical calculation skills and conceptual understanding. The most important topics are those that appear in both the 2021 and sample exams. Focus your revision on these areas, practice calculations, and develop your ability to critique statements about management accounting concepts.</p>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 平滑滚动导航
+            document.querySelectorAll('.nav a').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                });
+            });
+            
+            // 高亮当前部分
+            window.addEventListener('scroll', function() {
+                const sections = document.querySelectorAll('.section');
+                let currentSection = '';
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - 100;
+                    const sectionHeight = section.clientHeight;
+                    if (pageYOffset >= sectionTop && pageYOffset < sectionTop + sectionHeight) {
+                        currentSection = '#' + section.getAttribute('id');
+                    }
+                });
+                
+                document.querySelectorAll('.nav a').forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === currentSection) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+            
+            // 添加切换按钮功能
+            document.querySelectorAll('.toggle-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // 获取父级summary-box
+                    const summaryBox = this.closest('.summary-box');
+                    // 获取表格和引用信息
+                    const table = summaryBox.querySelector('table');
+                    const examRef = summaryBox.querySelector('.exam-ref');
+                    
+                    // 切换显示/隐藏状态
+                    table.classList.toggle('hidden');
+                    examRef.classList.toggle('hidden');
+                    
+                    // 更新按钮文本
+                    this.textContent = table.classList.contains('hidden') ? 'Show Details' : 'Hide Details';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
